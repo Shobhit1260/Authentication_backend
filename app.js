@@ -32,9 +32,9 @@ process.on('uncaughtException',err =>{
         app.use('/api/v1',auth);
         app.use('/api/v1',user);
          //  handling unnhandled routes
-        // app.all ('*',(req,res,next)=>{
-        //     next(new ErrorHandler(`${req.originalUrl} route not found `, 404));
-        // });
+        app.all ('*',(req,res,next)=>{
+            next(new ErrorHandler(`${req.originalUrl} route not found `, 404));
+        });
         
         app.use(errormiddleware);
         const port=process.env.PORT;
