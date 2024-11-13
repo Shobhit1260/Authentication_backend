@@ -35,15 +35,7 @@ process.on('uncaughtException',err =>{
         app.all ('*',(req,res,next)=>{
             next(new ErrorHandler(`${req.originalUrl} route not found `, 404));
         });
-        // @ts-ignore
-        app.use((req, res, next) => {
-            if (req.query.vercelToolbarCode) {
-              // Optionally log or ignore the request
-              return res.status(204).end(); // 204 No Content if you want to ignore it
-            }
-            next();
-          });
-       
+        
         app.use(errormiddleware);
         const port=process.env.PORT;
         const server = app.listen(port,()=>{
